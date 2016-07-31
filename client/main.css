@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css?family=Courgette);
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+nav {
+  width: 100%;
+  background-color: rgba(194, 196, 76, 1);
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Courgette';
+}
+
+#board {
+  width: 100%;
+  background-color: rgb(215, 215, 130);
+  min-height: calc(100vh - 40px);
+  display: flex;
+}
+
+.list {
+  width: 200px;
+  background-color: rgb(246, 245, 221);
+  margin: 20px 10px;
+  border-radius: 4px;
+}
+
+.list-title {
+  font-family: 'Helvetica';
+  font-weight: 600;
+  color: rgb(65, 66, 59);
+  padding-left: 12px;
+  font-size: 16px;
+}
