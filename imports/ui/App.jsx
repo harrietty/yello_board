@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Lists } from '../api/lists';
 import List from './List';
 import TopNav from './Topnav';
+import NewList from './Newlist';
 
-export default class App extends Component {
-  getLists () {
-    return [
-      { _id: 1, title: 'Urgent todos' },
-      { _id: 2, title: 'Ideas for stuff' },
-      { _id: 3, title: 'Completed' }
-    ];
-  }
-
+class App extends Component {
   renderLists () {
-    return this.getLists().map((list, i) => {
+    return this.props.lists.map((list, i) => {
       return <List key={i} list={list} />
     });
   }
@@ -23,8 +18,19 @@ export default class App extends Component {
         <TopNav />
         <div id='board'>
           {this.renderLists()}
+          <NewList />
         </div>
       </div>
     );
   }
 }
+
+App.propTypes = {
+  lists: PropTypes.array.isRequired
+};
+
+export default createContainer(() => {
+  return {
+    lists: Lists.find({}).fetch()
+  }
+}, App);

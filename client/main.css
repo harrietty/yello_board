@@ -20,6 +20,7 @@ nav {
   background-color: rgb(215, 215, 130);
   min-height: calc(100vh - 40px);
   display: flex;
+  align-items: flex-start;
 }
 
 .list {
@@ -29,10 +30,30 @@ nav {
   border-radius: 4px;
 }
 
+.list-header {
+  display: flex;
+  padding-left: 12px;
+  padding-right: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .list-title {
   font-family: 'Helvetica';
   font-weight: 600;
   color: rgb(65, 66, 59);
-  padding-left: 12px;
   font-size: 16px;
+}
+
+.new-list input, .change-list-title input {
+  width: 175px;
+  margin: 10px;
+  font-size: 17px;
+  height: 30px;
+  line-height: 30px;
+}
+
+.fa-trash:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
