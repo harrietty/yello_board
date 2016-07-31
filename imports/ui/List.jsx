@@ -1,14 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
+import Card from './Card';
+import NewCard from './Newcard';
 import { Lists } from '../api/lists';
+import { Cards } from '../api/cards';
 
-export default class List extends Component {
+class List extends Component {
   constructor (props) {
     super(props);
     this.state = {
       showInputField: false
     };
+  }
+
+  filterCards () {
+    let filteredCards = this.props.cards.filter(card => {
+      return card.listId._str === this.props.list._id._str;
+    });
+    return filteredCards.map((card, i) => {
+      return <Card key={i} index={i} card={card} />
+    });
   }
 
   deleteList () {
@@ -49,11 +61,20 @@ export default class List extends Component {
               <i className='fa fa-trash' onClick={this.deleteList.bind(this)} />
             </div>
           )}
+          {this.filterCards()}
+          <NewCard listId={this.props.list._id} />
       </div>
     );
   }
 }
 
 List.propTypes = {
-  list: PropTypes.object.isRequired
+  list: PropTypes.object.isRequired,
+  cards: PropTypes.array.isRequired
 };
+
+export default createContainer(() => {
+  return {
+    cards: Cards.find({}).fetch()
+  }
+}, List);

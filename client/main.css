@@ -24,7 +24,7 @@ nav {
 }
 
 .list {
-  width: 200px;
+  width: 280px;
   background-color: rgb(246, 245, 221);
   margin: 20px 10px;
   border-radius: 4px;
@@ -45,15 +45,39 @@ nav {
   font-size: 16px;
 }
 
-.new-list input, .change-list-title input {
-  width: 175px;
+.new-list input, .change-list-title input, .new-card input, .change-card-title input {
+  width: 250px;
   margin: 10px;
   font-size: 17px;
   height: 30px;
   line-height: 30px;
 }
 
-.fa-trash:hover {
+.new-card input, .change-card-title input {
+  font-size: 14px;
+}
+
+.change-card-title input {
+  width: 100%;
+}
+
+.fa-trash:hover, .fa-times:hover {
   cursor: pointer;
   opacity: 0.7;
+}
+
+.card {
+  width: 86%;
+  background-color: rgb(245, 243, 78);
+  margin: 5%;
+  font-size: 16px;
+  font-family: Helvetica;
+  padding: 2%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.card-contents{
+  display: flex;
+  justify-content: space-between;
 }
