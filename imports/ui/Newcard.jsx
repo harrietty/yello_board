@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 import { Cards } from '../api/cards';
 
 export default class NewCard extends Component {
@@ -10,7 +11,9 @@ export default class NewCard extends Component {
       text,
       createdAt: new Date(),
       listId: this.props.listId,
-      completed: false
+      completed: false,
+      owner: Meteor.userId(),
+      username: Meteor.user().username
     });
 
     ReactDOM.findDOMNode(this.refs.cardNameInput).value = '';

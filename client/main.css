@@ -109,6 +109,22 @@ nav {
   opacity: 0.8;
 }
 
+.welcome {
+  width: 100%;
+  text-align: center;
+  margin-top: calc(30vh - 40px);
+}
+
+.welcome h1 {
+  font-family: Helvetica;
+  font-weight: 200;
+}
+
+.welcome h2 {
+  font-family: Helvetica;
+  font-weight: 200;
+}
+
 /* ========================== LINKS ================================ */
 
 #login-buttons a {

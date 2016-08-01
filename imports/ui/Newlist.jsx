@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 import { Lists } from '../api/lists';
 
 export default class NewList extends Component {
@@ -10,7 +11,9 @@ export default class NewList extends Component {
 
     Lists.insert({
       title: text,
-      createdAt: new Date()
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username
     });
 
     ReactDOM.findDOMNode(this.refs.listNameInput).value = '';
