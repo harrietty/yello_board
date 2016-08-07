@@ -7,14 +7,9 @@ export default class NewCard extends Component {
   handleSubmit (e) {
     e.preventDefault();
     const text = ReactDOM.findDOMNode(this.refs.cardNameInput).value.trim();
-    Cards.insert({
-      text,
-      createdAt: new Date(),
-      listId: this.props.listId,
-      completed: false,
-      owner: Meteor.userId(),
-      username: Meteor.user().username
-    });
+    if (text.length > 0) {
+      Meteor.call('cards.insert', text, this.props.listId);
+    }
 
     ReactDOM.findDOMNode(this.refs.cardNameInput).value = '';
   }

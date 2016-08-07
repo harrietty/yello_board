@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { Cards } from '../api/cards';
 
@@ -12,7 +13,7 @@ export default class Card extends Component {
   }
 
   deleteCard () {
-    Cards.remove(this.props.card._id);
+    Meteor.call('cards.remove', this.props.card._id);
   }
 
   toggleShowInputField () {
@@ -28,9 +29,9 @@ export default class Card extends Component {
   handleSubmit (e) {
     e.preventDefault();
     const newText = e.target.firstChild.value.trim();
-    Cards.update(this.props.card._id, {
-      $set: {text: newText}
-    });
+    if (newText.length > 0) {
+      Meteor.call('cards.update', this.props.card._id, newText);
+    }
     this.toggleShowInputField();
   }
 

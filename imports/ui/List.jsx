@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import Card from './Card';
 import NewCard from './Newcard';
@@ -16,7 +17,7 @@ class List extends Component {
 
   filterCards () {
     let filteredCards = this.props.cards.filter(card => {
-      return card.listId._str === this.props.list._id._str;
+      return card.listId === this.props.list._id;
     });
     return filteredCards.map((card, i) => {
       return <Card key={i} index={i} card={card} />
@@ -24,7 +25,7 @@ class List extends Component {
   }
 
   deleteList () {
-    Lists.remove(this.props.list._id);
+    Meteor.call('lists.remove', this.props.list._id);
   }
 
   toggleShowInputField () {
@@ -40,15 +41,15 @@ class List extends Component {
   handleSubmit (e) {
     e.preventDefault();
     const newTitle = ReactDOM.findDOMNode(this.refs.newTitle).value.trim();
-
-    Lists.update(this.props.list._id, {
-      $set: {title: newTitle }
-    });
+    if (newTitle.length > 0) {
+      Meteor.call('lists.update', this.props.list._id);
+    }
     ReactDOM.findDOMNode(this.refs.newTitle).value = '';
     this.toggleShowInputField();
   }
 
   render () {
+    console.log(this.props)
     return (
       <div className='list'>
           {this.state.showInputField ? (

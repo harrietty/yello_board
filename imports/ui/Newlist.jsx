@@ -6,16 +6,10 @@ import { Lists } from '../api/lists';
 export default class NewList extends Component {
   handleSubmit (e) {
     e.preventDefault();
-
     const text = ReactDOM.findDOMNode(this.refs.listNameInput).value.trim();
-
-    Lists.insert({
-      title: text,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username
-    });
-
+    if (text.length > 0) {
+      Meteor.call('lists.insert', text);
+    }
     ReactDOM.findDOMNode(this.refs.listNameInput).value = '';
   }
 
